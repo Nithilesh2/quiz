@@ -5,6 +5,7 @@
 }
 
 .main {
+  transition: all 0.5s;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -13,8 +14,9 @@
 }
 
 .quizbox {
+  transition: all 0.5s;
   margin: 0 20px;
-  height: 450px;
+  height: 500px;
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -25,6 +27,13 @@
   border-style: dotted;
   box-shadow: 15px 15px 50px grey;
   background-color: rgb(240, 240, 240);
+}
+
+@media screen and (max-width: 400px) {
+  .quizbox {
+    height: 530px;
+    width: 400px;
+  }
 }
 
 .quiz {
@@ -96,8 +105,8 @@ hr {
 
 /* quiz.js */
 .questions {
-  padding: 25px 25px 15px 35px;
-  font-size: 14px;
+  padding: 20px 20px 20px 35px;
+  font-size: 17px;
   font-family: "Poppins", sans-serif;
   display: flex;
   align-items: flex-start;
@@ -105,6 +114,14 @@ hr {
   width: 100%;
   height: auto;
   cursor: default;
+}
+
+.known {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  padding-top: 10px;
+  font-weight: 400;
+  transition: all 1s;
 }
 
 .options {
@@ -144,6 +161,7 @@ hr {
   background-color: rgb(255, 117, 117);
   cursor: pointer;
   border-radius: 0 0 10px 0;
+  display: none;
 }
 
 .home {
@@ -165,6 +183,6 @@ hr {
   font-size: 20px;
   font-family: "Poppins", sans-serif;
   position: relative;
-  bottom: 80px;
+  bottom: 250px;
   padding: 0 0 0 25px;
 }

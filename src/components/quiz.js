@@ -9,8 +9,8 @@ export default function quiz() {
         <div className="quizbox">
           <div className="quiz">QUIZ</div>
           <hr />
+          <span className="known">(1/10)</span>
           <div className="questions">
-            <span className="qno">1)</span>
             <span className="qname">
               HTML stands for Hyper Text Markup Language
             </span>
@@ -25,9 +25,9 @@ export default function quiz() {
           </div>
 
           <div className="completed">
-            {/* <div>Correct : 0</div>
-            <div>Incorrect : 0</div> */}
-            Successfully completed all problems.
+            {/* <div className="correct">Correct : 0</div>
+            <div className="incorrect">Incorrect : 0</div> */}
+            Successfully completed<br />all problems.
           </div>
 
           <div className="leftandright">

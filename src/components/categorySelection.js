@@ -2,59 +2,31 @@ import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 
-async function buttonPressed() {
-  let select = document.getElementById("sel");
-  let val = select.value;
+export default function CategorySelection() {
+  async function ButtonPressed() {
+    let select = document.getElementById("sel");
+    let val = select.value;
 
-  if (val === "0") {
-    alert("No category chosen, so it'll be random.");
-  }
-
-  let api = `https://opentdb.com/api.php?amount=12&category=${val}&type=boolean`;
-  const response = await fetch(api);
-  const data = await response.json();
-
-  let i = 1;
-  let completed = document.querySelector(".completed");
-  let question = document.querySelector(".qname");
-  question.innerHTML = data.results[i].question;
-
-  let button1 = document.querySelector(".true");
-  let button2 = document.querySelector(".false");
-
-  button1.addEventListener("click", () => {
-    if (button1.value === data.results[i].correct_answer) {
-      button1.style.backgroundColor = "#9aeabc";
-    } else {
-      button1.style.backgroundColor = "#ff9393";
-      button2.style.backgroundColor = "#9aeabc";
+    if (val === "0") {
+      alert("No category chosen, so it'll be random.");
     }
-  });
 
-  button2.addEventListener("click", () => {
-    if (button1.value === data.results[i].correct_answer) {
-      button1.style.backgroundColor = "#9aeabc";
-      button2.style.backgroundColor = "#ff9393";
-    } else {
-      button2.style.backgroundColor = "#9aeabc";
-    }
-  });
-  //////////////////////////////////
-  //////////////////////////////////
+    let api = `https://opentdb.com/api.php?amount=12&category=${val}&type=boolean`;
+    const response = await fetch(api);
+    const data = await response.json();
 
-  let nextButton = document.querySelector(".next");
-  nextButton.addEventListener("click", () => {
-
-    let qnumber = document.querySelector(".qno");
-    i += 1;
-    qnumber.innerHTML = i + ")";
-    button1.style.backgroundColor = "white";
-    button2.style.backgroundColor = "white";
-
+    let i = 1;
+    let completed = document.querySelector(".completed");
     let question = document.querySelector(".qname");
     question.innerHTML = data.results[i].question;
 
+    let button1 = document.querySelector(".true");
+    let button2 = document.querySelector(".false");
+
+    let nextButton = document.querySelector(".next");
+
     button1.addEventListener("click", () => {
+      nextButton.style.display = "block";
       if (button1.value === data.results[i].correct_answer) {
         button1.style.backgroundColor = "#9aeabc";
       } else {
@@ -64,6 +36,7 @@ async function buttonPressed() {
     });
 
     button2.addEventListener("click", () => {
+      nextButton.style.display = "block";
       if (button1.value === data.results[i].correct_answer) {
         button1.style.backgroundColor = "#9aeabc";
         button2.style.backgroundColor = "#ff9393";
@@ -71,19 +44,51 @@ async function buttonPressed() {
         button2.style.backgroundColor = "#9aeabc";
       }
     });
+    //////////////////////////////////
+    //////////////////////////////////
 
-    if (i === 11) {
+    nextButton.addEventListener("click", () => {
       nextButton.style.display = "none";
-      completed.style.display = "block";
-      question.style.display = "none";
-      button1.style.display = "none";
-      button2.style.display = "none";
-      qnumber.style.display = "none";
-    }
-  });
-}
 
-export default function categorySelection() {
+      i += 1;
+      let known = document.querySelector(".known");
+      known.innerHTML = `(${i}/10)`;
+      button1.style.backgroundColor = "white";
+      button2.style.backgroundColor = "white";
+
+      let question = document.querySelector(".qname");
+      question.innerHTML = data.results[i].question;
+
+      button1.addEventListener("click", () => {
+        nextButton.style.display = "block";
+        if (button1.value === data.results[i].correct_answer) {
+          button1.style.backgroundColor = "#9aeabc";
+        } else {
+          button1.style.backgroundColor = "#ff9393";
+          button2.style.backgroundColor = "#9aeabc";
+        }
+      });
+
+      button2.addEventListener("click", () => {
+        nextButton.style.display = "block";
+        if (button1.value === data.results[i].correct_answer) {
+          button1.style.backgroundColor = "#9aeabc";
+          button2.style.backgroundColor = "#ff9393";
+        } else {
+          button2.style.backgroundColor = "#9aeabc";
+        }
+      });
+
+      if (i === 11) {
+        known.style.display = "none";
+        nextButton.style.display = "none";
+        completed.style.display = "block";
+        question.style.display = "none";
+        button1.style.display = "none";
+        button2.style.display = "none";
+      }
+    });
+  }
 
   return (
     <>
@@ -109,7 +114,7 @@ export default function categorySelection() {
             </select>
           </div>
           <Link to={"/quiz"}>
-            <button type="button" className="button" onClick={buttonPressed}>
+            <button type="button" className="button" onClick={ButtonPressed}>
               Start
             </button>
           </Link>

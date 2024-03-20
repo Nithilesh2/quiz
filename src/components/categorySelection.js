@@ -29,6 +29,7 @@ export default function CategorySelection() {
       nextButton.style.display = "block";
       if (button1.value === data.results[i].correct_answer) {
         button1.style.backgroundColor = "#9aeabc";
+        button2.style.pointerEvents = "none";
       } else {
         button1.style.backgroundColor = "#ff9393";
         button2.style.backgroundColor = "#9aeabc";
@@ -42,6 +43,7 @@ export default function CategorySelection() {
         button2.style.backgroundColor = "#ff9393";
       } else {
         button2.style.backgroundColor = "#9aeabc";
+        button1.style.pointerEvents = "none";
       }
     });
     //////////////////////////////////
@@ -63,6 +65,7 @@ export default function CategorySelection() {
         nextButton.style.display = "block";
         if (button1.value === data.results[i].correct_answer) {
           button1.style.backgroundColor = "#9aeabc";
+          button2.style.pointerEvents = "none";
         } else {
           button1.style.backgroundColor = "#ff9393";
           button2.style.backgroundColor = "#9aeabc";
@@ -76,8 +79,12 @@ export default function CategorySelection() {
           button2.style.backgroundColor = "#ff9393";
         } else {
           button2.style.backgroundColor = "#9aeabc";
+          button1.style.pointerEvents = "none";
         }
       });
+
+      button1.style.pointerEvents = "fill";
+      button2.style.pointerEvents = "fill";
 
       if (i === 11) {
         known.style.display = "none";
